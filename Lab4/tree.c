@@ -8,7 +8,7 @@ Node* Node_create() {
 
 Node* Tree_insert(Node* node, char* data) {
     if(node == 0){
-        Node* ret =  Node_create();
+        Node* ret = Node_create();
         ret->data = data;
         return ret;
     }
@@ -39,20 +39,6 @@ void Tree_printalphabetically(Node* node) {
         }
         
         printf("%s\n", node->data);
-        
-        if(node->right != 0){
-            Tree_printalphabetically(node->right);
-        }
-    }
-}
-
-void Tree_printfilealphabetically(FILE* fp, Node* node) {
-    if(node != 0){
-        if(node->left != 0) {
-            Tree_printalphabetically(node->left);
-        }
-        
-        fprintf(fp, "%s\n", node->data);
         
         if(node->right != 0){
             Tree_printalphabetically(node->right);
