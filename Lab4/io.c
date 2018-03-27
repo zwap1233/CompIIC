@@ -1,21 +1,29 @@
-#include"tree.h"
-#include<stdlib.h>
-#include<stdio.h>
-#include<string.h>
+#include "tree.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
-//Node* Tree_read(char* filename,Node* root)
-//{
+Node* Tree_read(char* filename, Node* root) {
+    FILE* fp = fopen(filename);
+    
+    char* line = 0;
+    size_t len = 0;
+    ssize_t read;
+    
+    while((read = getline(&line, &len, fp)) != -1){
+        Tree_insert(root, line);
+    }
+    
+    fclose(fp);
+}
 
+void Tree_write(char* filename, Node* root) {
+    FILE* fp = fopen(filename);
+    
+    
+}
 
-//}
-
-//void Tree_write(char*filename, Node*root)
-//{
-
-//}
-
-void write_pre_order(FILE * fp,Node* node)
-{
+void write_pre_order(FILE * fp,Node* node) {
     fprintf(fp,"%s\n",node->data);
     if(node->left)
         write_pre_order(fp,node->left);
@@ -23,14 +31,12 @@ void write_pre_order(FILE * fp,Node* node)
         write_pre_order(fp,node->right);
 }
 
-void bst_print_dot_null(char* data, int nullcount, FILE* stream)
-{
+void bst_print_dot_null(char* data, int nullcount, FILE* stream) {
     fprintf(stream, "    null%d [shape=point];\n", nullcount);
     fprintf(stream, "    %s -> null%d;\n", data, nullcount);
 }
 
-void bst_print_dot_aux(Node* node, FILE* stream)
-{
+void bst_print_dot_aux(Node* node, FILE* stream) {
     static int nullcount = 0;
 
     if (node->left)
@@ -50,8 +56,7 @@ void bst_print_dot_aux(Node* node, FILE* stream)
         bst_print_dot_null(node->data, nullcount++, stream);
 }
 
-void bst_print_dot(Node* tree, char* fname)
-{
+void bst_print_dot(Node* tree, char* fname) {
         if(!tree)
     {
         printf("There is no tree to save \n");

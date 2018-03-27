@@ -7,8 +7,8 @@ typedef struct Node
 {
     struct Node* left;
     struct Node* right;
-  //  void(*printalphabetically)(struct Node* node);
-     char* data;
+    //  void(*printalphabetically)(struct Node* node);
+    char* data;
 } Node;
 
 
@@ -20,6 +20,8 @@ int   Tree_height(Node* node);
 int   Tree_count(Node* node);
 Node* Tree_find(Node*node,char* data);
 void  Tree_clear(Node*node);
+
+void Tree_printfilealphabetically(FILE* fp, Node* node);
 
 Node* Tree_read(char* filename,Node* root);
 void write_pre_order(FILE * fp,Node* node);
